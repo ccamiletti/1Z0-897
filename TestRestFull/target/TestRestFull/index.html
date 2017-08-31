@@ -1,0 +1,28 @@
+<html ng-app="app">
+
+	<head>
+		<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.19/angular.min.js"></script>
+    	<script src="resources/js/home.js"></script>
+	</head>
+
+	<body ng-controller="ClienteController">
+	
+		<form action="" enctype="multipart/form-data">
+	
+			<h2>Hello World!...</h2>
+			<h1>{{mensaje}}</h1>
+	
+			<input type="text" ng-model="clientForm.name" name="name" />
+			<input type="text" ng-model="clientForm.address" name="address" />
+			<input type="text" ng-model="clientForm.age" name="age" />
+	
+	
+			<input type="button" ng-click="insertClient()" value="Insert Client"/>
+			<input type="button" ng-click="showClients()" value="show clients"/>
+			
+			{{salida}}
+		</form>
+		
+	</body>
+
+</html>
