@@ -1,7 +1,0 @@
-com/ccs/publish/AdagesPublisher.class
-com/ccs/rest/RestfulAdage.class
-com/ccs/rest/Adages.class
-com/ccs/rest/ClientAdmin.class
-com/ccs/commun/Adage.class
-com/ccs/commun/Client.class
-com/ccs/rest/HomeRest.class

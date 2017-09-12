@@ -1,6 +1,7 @@
 package com.ccs.rest;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import javax.ws.rs.Consumes;
@@ -109,19 +110,16 @@ public class ClientAdmin {
 	public Response deleteClient(@PathParam("dni") Integer dni) {
 		Response rb = null;
 		try {
-			Client resp = null;
-			for (Client c : clientList) {
-				if (c.getDni().equals(dni)) {
-					resp = c;
-				}
+			Client c  = new Client();
+			c.setDni(dni);
+			Collections.sort(clientList);
+			int position = Collections.binarySearch(clientList, c);
+			if (position >= 0) {
+				c = clientList.remove(position);
+				rb = Response.status(Response.Status.OK).entity(c).type(MediaType.APPLICATION_JSON).build();
 			}
-			if (null == resp)
-				throw new Exception();
-			
-			clientList.remove(resp);
-			rb = Response.status(Response.Status.OK).entity("").type(MediaType.TEXT_PLAIN).build();
 		}catch(Exception e) {
-			rb = Response.status(Response.Status.BAD_REQUEST).entity("ERROR").type(MediaType.TEXT_PLAIN).build();
+			rb = Response.status(Response.Status.NOT_FOUND).entity("ERROR").type(MediaType.TEXT_PLAIN).build();
 		}
 		
 		return rb;

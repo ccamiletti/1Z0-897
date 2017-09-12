@@ -6,7 +6,7 @@ import javax.xml.bind.annotation.XmlType;
 
 @XmlRootElement
 @XmlType(propOrder = {"age", "address", "name", "phone"})
-public class Client {
+public class Client implements Comparable<Client>{
 
 	@XmlElement(required = true)
 	private String name;
@@ -64,6 +64,16 @@ public class Client {
 	}
 	public void setAddress(String address) {
 		this.address = address;
+	}
+
+	@Override
+	public int compareTo(Client o) {
+		int ret = 1;
+		if (o.getDni().equals(this.getDni()))
+			ret = 0;
+		
+		return ret;
+		
 	}
 	
 	

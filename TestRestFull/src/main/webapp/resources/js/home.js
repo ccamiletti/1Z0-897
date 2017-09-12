@@ -4,9 +4,12 @@ function PruebaController($scope) {
   $scope.mensaje="Hola Mundo";
 }
 
-app.controller("ClienteController",['$scope','$log','$http',function($scope,$log,$http) {
-  
-	$scope.mensaje="test angular restfull..."
+app.controller("ClienteController",['$location','$scope','$log','$http',function($location, $scope,$log,$http) {
+	
+	$scope.uri = $location.protocol() + '://' + $location.host() + ':' + $location.port() + '/TestRestFull';
+	
+	
+	$scope.mensaje="test angular restfull...";
 	$scope.salida = "";	
 	$scope.find = "";
 	$scope.clientForm = {
@@ -22,37 +25,37 @@ app.controller("ClienteController",['$scope','$log','$http',function($scope,$log
 		
 		 $http({
 			    method: 'GET', 
-			    url: 'http://localhost:8080/TestRestFull/rest/resourcesA/json'
+			    url: $scope.uri + '/rest/resourcesA/json'
 			  }).success(function(data, status, headers, config) {
 				  $scope.salida = data;
 			  }).error(function(data, status, headers, config) {
 			      alert("Ha fallado la petición. Estado HTTP:"+status);
 			  });
-	}	
+	};	
 
 	$scope.getXML = function () {
 		
 		 $http({
 			    method: 'GET', 
-			    url: 'http://localhost:8080/TestRestFull/rest/resourcesA/'
+			    url: $scope.uri + '/rest/resourcesA/'
 			  }).success(function(data, status, headers, config) {
 				  $scope.salida = data;
 			  }).error(function(data, status, headers, config) {
 			      alert("Ha fallado la petición. Estado HTTP:"+status);
 			  });
-	}	 
+	};
 
 	$scope.showClients = function () {
 		
 		 $http({
 			    method: 'GET', 
-			    url: 'http://localhost:8080/TestRestFull/rest/admin/clientList'
+			    url: $scope.uri + '/rest/admin/clientList'
 			  }).success(function(data, status, headers, config) {
 				  $scope.salida = data;
 			  }).error(function(data, status, headers, config) {
 			      alert("Ha fallado la petición. Estado HTTP:"+status);
 			  });
-	}	 
+	};	 
 		
 	$scope.insertClient = function () {
 		
@@ -60,7 +63,7 @@ app.controller("ClienteController",['$scope','$log','$http',function($scope,$log
 		console.log(angular.toJson($scope.clientForm));
 		$http({
 			    method: 'POST', 
-			    url: 'http://localhost:8080/TestRestFull/rest/admin/createClient',
+			    url: $scope.uri + '/rest/admin/createClient',
 			    data : angular.toJson($scope.clientForm),
 			    headers : {
                     'Content-Type' : 'application/json',
@@ -71,13 +74,13 @@ app.controller("ClienteController",['$scope','$log','$http',function($scope,$log
 			  }).error(function(data, status, headers, config) {
 			      alert("Ha fallado la petición. Estado HTTP:"+status);
 			  });
-	}	 
+	};	 
 
 	$scope.updateClient = function (id) {
 		
 		$http({
 			    method: 'PUT', 
-			    url: 'http://localhost:8080/TestRestFull/rest/admin/'+id,
+			    url: $scope.uri + '/rest/admin/'+id,
 			    data : angular.toJson($scope.clientForm),
 			    headers : {
                     'Content-Type' : 'application/json',
@@ -88,13 +91,13 @@ app.controller("ClienteController",['$scope','$log','$http',function($scope,$log
 			  }).error(function(data, status, headers, config) {
 			      alert("Ha fallado la petición. Estado HTTP:"+status);
 			  });
-	}	 
+	};	 
 
 	$scope.cleanClients = function () {
 		
 		$http({
 			    method: 'GET', 
-			    url: 'http://localhost:8080/TestRestFull/rest/admin/cleanList',
+			    url: $scope.uri + '/rest/admin/cleanList',
 			    data : angular.toJson($scope.clientForm),
 			    
 			  }).success(function(data, status, headers, config) {
@@ -102,13 +105,13 @@ app.controller("ClienteController",['$scope','$log','$http',function($scope,$log
 			  }).error(function(data, status, headers, config) {
 			      alert("Ha fallado la petición. Estado HTTP:"+status);
 			  });
-	}	 
+	};	 
 
 	$scope.findClient = function () {
 		
 		$http({
 			    method: 'POST', 
-			    url: 'http://localhost:8080/TestRestFull/rest/admin/findClient',
+			    url: 'http://localhost:8888/',
      			data: 'id='+$scope.find
 			    
 			  }).success(function(data, status, headers, config) {
@@ -120,18 +123,19 @@ app.controller("ClienteController",['$scope','$log','$http',function($scope,$log
 			  }).error(function(data, status, headers, config) {
 			      alert("Ha fallado la petición. Estado HTTP:"+status);
 			  });
-	}	 
+	};
+	
 	$scope.deleteClient = function (id) {
 		
 		$http({
-			    method: 'GET', 
-			    url: 'http://localhost:8080/TestRestFull/rest/admin/deleteClient/'+id
+			    method: 'DELETE', 
+			    url: $scope.uri + '/rest/admin/deleteClient/'+id
 			    
 			  }).success(function(data, status, headers, config) {
 				  $scope.salida = data;
 			  }).error(function(data, status, headers, config) {
 			      alert("Ha fallado la petición. Estado HTTP:"+status);
 			  });
-	}	 
+	};	 
 		
 }]);
