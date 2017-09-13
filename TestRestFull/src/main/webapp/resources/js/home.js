@@ -111,7 +111,7 @@ app.controller("ClienteController",['$location','$scope','$log','$http',function
 		
 		$http({
 			    method: 'POST', 
-			    url: 'http://localhost:8888/',
+			    url: $scope.uri + '/rest/admin/findClient',
      			data: 'id='+$scope.find
 			    
 			  }).success(function(data, status, headers, config) {
