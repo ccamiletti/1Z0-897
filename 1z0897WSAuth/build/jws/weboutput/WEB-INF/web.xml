@@ -1,0 +1,38 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<web-app xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="2.5" id="WebApp_ID">
+  <display-name>1z0897WSAuth</display-name>
+  <servlet>
+    <servlet-name>CustomerWSServiceServlethttp</servlet-name>
+    <servlet-class>cl.ccs.ws.CustomerWSImpl</servlet-class>
+    <load-on-startup>0</load-on-startup>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>CustomerWSServiceServlethttp</servlet-name>
+    <url-pattern>CustomerWSService</url-pattern>
+  </servlet-mapping>
+  <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+    <welcome-file>index.htm</welcome-file>
+    <welcome-file>index.jsp</welcome-file>
+    <welcome-file>default.html</welcome-file>
+    <welcome-file>default.htm</welcome-file>
+    <welcome-file>default.jsp</welcome-file>
+  </welcome-file-list>
+  <security-constraint>
+    <web-resource-collection>
+      <web-resource-name>webservice</web-resource-name>
+      <url-pattern>/*</url-pattern>
+      <http-method>POST</http-method>
+    </web-resource-collection>
+    <auth-constraint>
+      <role-name>1z0897Role</role-name>
+    </auth-constraint>
+  </security-constraint>
+  <login-config>
+    <auth-method>BASIC</auth-method>
+    <realm-name>default</realm-name>
+  </login-config>
+  <security-role>
+    <role-name>1z0897Role</role-name>
+  </security-role>
+</web-app>
