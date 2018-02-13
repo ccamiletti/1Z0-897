@@ -1,0 +1,10 @@
+Create a web service starting from a WSDL file using JAX-WS
+we create the java class after that, we will create wsdl file with wsimport or wsgen.
+
+If you start with an implementation bean class, use the wsgen command-line tool to generate all the web services provider artifacts, 
+including a WSDL file if requested.
+
+If you start with a WSDL file, use the wsimport command-line tool to generate all the web services artifacts for either the server or the client
+
+wsimport = client
+wsgen =  server
